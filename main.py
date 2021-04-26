@@ -16,21 +16,24 @@ def check_input():
     """
     All the type checks are here so that the rest of the program can work accurately.
     """
-    try:
-        yas = int(yas_entry.get())
-        bmi = float(bmi_entry.get())
-        cinsiyet = gender_val_inside.get()
-        asa_skoru = as_val_inside.get()
-        ameliyat_tipi = at_val_inside.get()
-    except ValueError:
-        messagebox.showwarning("Geçersiz Datatipi", "Lütfen yaş bölgesine tam sayı,"
-                                                   " BMI bölgesine rasyonel sayı yazınız.")
-    except TclError:
-        messagebox.showwarning("Seçilmemiş Değerler Var!", "Lütfen ameliyat tipi, cinsiyet ve"
-                                                      " asa skorunu seçtiğinizden emin olun.")
+    ameliyat_tipi = at_val_inside.get()
+    cinsiyet = gender_val_inside.get()
+    if ameliyat_tipi == "Lüften seçiniz." or cinsiyet == "Lütfen seçiniz.":
+        messagebox.showwarning("Seçilmemiş Değerler Var!", "Lütfen ameliyat tipi ve cinsiyeti seçtiğinizden emin olun.")
     else:
-        print(f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\nYaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
-        add_to_csv()
+        try:
+            yas = int(yas_entry.get())
+            bmi = float(bmi_entry.get())
+            asa_skoru = as_val_inside.get()
+        except ValueError:
+            messagebox.showwarning("Geçersiz Datatipi", "Lütfen yaş bölgesine tam sayı,"
+                                                        " BMI bölgesine rasyonel sayı yazınız.")
+        except TclError:
+            messagebox.showwarning("Seçilmemiş Değerler Var!", "Lütfen asa skorunu seçtiğinizden emin olun.")
+        else:
+            print(f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\n"
+                  f"Yaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
+            add_to_csv()
 
 
 # ------------ UI SETUP ----------------- #
