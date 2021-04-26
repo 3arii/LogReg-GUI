@@ -5,12 +5,12 @@ import csv
 # constants
 GREY = "#d8e3e7"
 BLUE = "#9dbeb9"
-morbidite_degeri = ""
+morbidite_degeri = 0
 
 
 # ----------- FUNCTIONALITY SETUP -------------- #
 def add_to_csv(csv_dict):
-    fields = ["Ameliyat Tipi", "Asa Skoru", "Yas", "Cinsiyet", "BMI"]
+    fields = ["Morbidite", "Ameliyat", "Asa Skoru", "Age", "gender", "BMI"]
     with open('data.csv', mode='a', newline="") as data_file:
         csv_writer = csv.DictWriter(data_file, fieldnames=fields, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(csv_dict)
@@ -52,10 +52,11 @@ def check_input():
             else:
                 cinsiyet = 1
             toCsv = {
-                "Ameliyat Tipi": ameliyat_tipi,
+                "Morbidite": morbidite_degeri,
+                "Ameliyat": ameliyat_tipi,
                 "Asa Skoru": asa_skoru,
-                "Yas": yas,
-                "Cinsiyet": cinsiyet,
+                "Age": yas,
+                "gender": cinsiyet,
                 "BMI": bmi
             }
             add_to_csv(toCsv)
