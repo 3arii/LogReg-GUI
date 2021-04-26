@@ -4,11 +4,11 @@ from tkinter import messagebox
 # constants
 GREY = "#d8e3e7"
 BLUE = "#9dbeb9"
-morbidite_degeri = "1/0"
+morbidite_degeri = ""
 
 
 # ----------- FUNCTIONALITY SETUP -------------- #
-def add_to_csv():
+def add_to_csv(strToAdd):
     pass
 
 
@@ -19,7 +19,8 @@ def check_input():
     ameliyat_tipi = at_val_inside.get()
     cinsiyet = gender_val_inside.get()
     if ameliyat_tipi == "Lüften seçiniz." or cinsiyet == "Lütfen seçiniz.":
-        messagebox.showwarning("Seçilmemiş Değerler Var!", "Lütfen ameliyat tipi ve cinsiyeti seçtiğinizden emin olun.")
+        messagebox.showwarning("Seçilmemiş Değerler Var!",
+                               "Lütfen ameliyat tipi ve cinsiyeti seçtiğinizden emin olun.")
     else:
         try:
             yas = int(yas_entry.get())
@@ -29,11 +30,12 @@ def check_input():
             messagebox.showwarning("Geçersiz Datatipi", "Lütfen yaş bölgesine tam sayı,"
                                                         " BMI bölgesine rasyonel sayı yazınız.")
         except TclError:
-            messagebox.showwarning("Seçilmemiş Değerler Var!", "Lütfen asa skorunu seçtiğinizden emin olun.")
+            messagebox.showwarning(
+                "Seçilmemiş Değerler Var!", "Lütfen asa skorunu seçtiğinizden emin olun.")
         else:
-            print(f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\n"
-                  f"Yaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
-            add_to_csv()
+            toCsv = (f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\n"
+                     f"Yaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
+            add_to_csv(toCsv)
 
 
 # ------------ UI SETUP ----------------- #
@@ -43,7 +45,8 @@ window.minsize(width=600, height=300)
 window.config(padx=50, pady=20, bg=GREY)
 
 # ameliyat tipi
-ameliyat_tipi_label = Label(text="Ameliyat Tipi: ", bg=GREY, font=("Arial", 12))
+ameliyat_tipi_label = Label(text="Ameliyat Tipi: ",
+                            bg=GREY, font=("Arial", 12))
 ameliyat_tipi_label.grid(row=0, column=0, pady=10, sticky="w")
 
 at_values = ["Kapalı", "Açık"]
@@ -57,7 +60,7 @@ asa_score_label = Label(text="Asa Skoru: ", bg=GREY, font=("Arial", 12))
 asa_score_label.grid(row=0, column=1, sticky="w", pady=10)
 
 
-as_values = ["   1   ", "   0   "]
+as_values = ["   1   ", "   2   ", "   3  "]
 as_val_inside = IntVar(window)
 as_val_inside.set("Lütfen seçiniz.")
 as_menu = OptionMenu(window, as_val_inside, *as_values)
@@ -89,7 +92,8 @@ bmi_entry = Entry(font=("Arial", 10))
 bmi_entry.grid(column=4, row=1, pady=(0, 40), sticky="nw")
 
 # morbidite
-morbidite_label = Label(text=f"Morbidite: {morbidite_degeri}", bg=GREY, font=("Arial", 12))
+morbidite_label = Label(
+    text=f"Morbidite: {morbidite_degeri}", bg=GREY, font=("Arial", 12))
 morbidite_label.grid(row=3, column=1, sticky="w")
 
 # diğer
@@ -97,7 +101,9 @@ warning_note = Label(text="Bu programın tutarlılık oranı %92'dir. Kesin bir 
                           " profesyonellerden yardım alınız.", font=("Arial", 10), bg=GREY)
 warning_note.grid(row=5, column=0, columnspan=4, sticky="w")
 
-submit = Button(text="Hesapla", padx=10, pady=10, font=("Arial", 12), bg=BLUE, command=check_input)
+submit = Button(text="Hesapla", padx=10, pady=10, font=(
+    "Arial", 12), bg=BLUE, command=check_input)
 submit.grid(row=3, column=0, sticky="nw", pady=(0, 10))
 
 window.mainloop()
+
