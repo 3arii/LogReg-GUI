@@ -1,4 +1,4 @@
-import csv 
+import csv
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -26,6 +26,7 @@ X_egitim = sc.fit_transform(X_egitim)
 X_test = sc.fit_transform(X_test)
 testElem = sc.fit_transform(testElem)
 
+
 def modeller(X_egitim, Y_egitim):
 
     log = LogisticRegression(random_state=0)
@@ -33,7 +34,7 @@ def modeller(X_egitim, Y_egitim):
 
     #print("[0]Logistic Regression Training Accuracy:",
     #     log.score(X_egitim, Y_egitim))
-    
+
     return log
 
 
@@ -46,4 +47,5 @@ TN = cm[0][0]
 FN = cm[1][0]
 FP = cm[0][1]
 
+global pred
 pred = model.predict(testElem)
