@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 
-
 # constants
 GREY = "#d8e3e7"
 BLUE = "#9dbeb9"
@@ -17,17 +16,18 @@ def check_input():
     """
     All the type checks are here so that the rest of the program can work accurately.
     """
-    ameliyat_tipi = at_entry.get("1.0", END)
     try:
         yas = int(yas_entry.get())
         bmi = float(bmi_entry.get())
         cinsiyet = gender_val_inside.get()
         asa_skoru = as_val_inside.get()
+        ameliyat_tipi = at_val_inside.get()
     except ValueError:
-        messagebox.showwarning("Invalid Datatype", "Lütfen yaş bölgesine tam sayı,"
+        messagebox.showwarning("Geçersiz Datatipi", "Lütfen yaş bölgesine tam sayı,"
                                                    " BMI bölgesine rasyonel sayı yazınız.")
     except TclError:
-        messagebox.showwarning("Select Fields Empty", "Lütfen cinsiyet ve asa skorunu seçtiğinizden emin olun.")
+        messagebox.showwarning("Seçilmemiş Değerler Var!", "Lütfen ameliyat tipi, cinsiyet ve"
+                                                      " asa skorunu seçtiğinizden emin olun.")
     else:
         print(f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\nYaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
         add_to_csv()
@@ -43,7 +43,10 @@ window.config(padx=50, pady=20, bg=GREY)
 ameliyat_tipi_label = Label(text="Ameliyat Tipi: ", bg=GREY, font=("Arial", 12))
 ameliyat_tipi_label.grid(row=0, column=0, pady=10, sticky="w")
 
-at_entry = Text(font=("Arial", 10), height=2, width=20)
+at_values = ["Kapalı", "Açık"]
+at_val_inside = StringVar(window)
+at_val_inside.set("Lütfen seçiniz.")
+at_entry = OptionMenu(window, at_val_inside, *at_values)
 at_entry.grid(column=0, row=1, pady=(0, 40), sticky="nw")
 
 # asa skoru
@@ -53,7 +56,7 @@ asa_score_label.grid(row=0, column=1, sticky="w", pady=10)
 
 as_values = ["   1   ", "   0   "]
 as_val_inside = IntVar(window)
-as_val_inside.set("Select an option.")
+as_val_inside.set("Lütfen seçiniz.")
 as_menu = OptionMenu(window, as_val_inside, *as_values)
 as_menu.grid(column=1, row=1, pady=(0, 40), sticky="nw")
 
@@ -71,7 +74,7 @@ gender_label.grid(row=0, column=3, pady=10, sticky="w")
 
 gender_values = ["Kadın", "Erkek"]
 gender_val_inside = StringVar(window)
-gender_val_inside.set("Select an option")
+gender_val_inside.set("Lütfen seçiniz.")
 gender_entry = OptionMenu(window, gender_val_inside, *gender_values)
 gender_entry.grid(column=3, row=1, sticky="nw", pady=(0, 40))
 
