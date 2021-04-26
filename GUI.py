@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import csv
 
 # constants
 GREY = "#d8e3e7"
@@ -8,8 +9,12 @@ morbidite_degeri = ""
 
 
 # ----------- FUNCTIONALITY SETUP -------------- #
-def add_to_csv(strToAdd):
-    pass
+def add_to_csv(csv_dict):
+    fields = ["Ameliyat Tipi", "Asa Skoru", "Yas", "Cinsiyet", "BMI"]
+    with open('data.csv', mode='a', newline="") as data_file:
+        csv_writer = csv.DictWriter(data_file, fieldnames=fields, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(csv_dict)
+    return
 
 
 def check_input():
@@ -33,8 +38,26 @@ def check_input():
             messagebox.showwarning(
                 "Seçilmemiş Değerler Var!", "Lütfen asa skorunu seçtiğinizden emin olun.")
         else:
-            toCsv = (f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\n"
-                     f"Yaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
+            # toCsv = (f"Ameliyat Tipi: {ameliyat_tipi}\nAsa skoru: {asa_skoru}\n"
+            #          f"Yaş: {yas}\nCinsiyet: {cinsiyet}\nBMI: {bmi}")
+            """
+            Converting to gender and type to 1 or 0.
+            """
+            if ameliyat_tipi == "Kapalı":
+                ameliyat_tipi = 1
+            else:
+                ameliyat_tipi = 2
+            if cinsiyet == "Kadın":
+                cinsiyet = 2
+            else:
+                cinsiyet = 1
+            toCsv = {
+                "Ameliyat Tipi": ameliyat_tipi,
+                "Asa Skoru": asa_skoru,
+                "Yas": yas,
+                "Cinsiyet": cinsiyet,
+                "BMI": bmi
+            }
             add_to_csv(toCsv)
 
 
@@ -59,7 +82,6 @@ at_entry.grid(column=0, row=1, pady=(0, 40), sticky="nw")
 asa_score_label = Label(text="Asa Skoru: ", bg=GREY, font=("Arial", 12))
 asa_score_label.grid(row=0, column=1, sticky="w", pady=10)
 
-
 as_values = ["   1   ", "   2   ", "   3  "]
 as_val_inside = IntVar(window)
 as_val_inside.set("Lütfen seçiniz.")
@@ -76,7 +98,6 @@ yas_entry.grid(column=2, row=1, sticky="nw", pady=(0, 40))
 # cinsiyet
 gender_label = Label(text="Cinsiyet: ", bg=GREY, font=("Arial", 12))
 gender_label.grid(row=0, column=3, pady=10, sticky="w")
-
 
 gender_values = ["Kadın", "Erkek"]
 gender_val_inside = StringVar(window)
@@ -106,4 +127,3 @@ submit = Button(text="Hesapla", padx=10, pady=10, font=(
 submit.grid(row=3, column=0, sticky="nw", pady=(0, 10))
 
 window.mainloop()
-
