@@ -1,11 +1,13 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
+from Logistic_Regression import *
+
 
 # constants
 GREY = "#d8e3e7"
 BLUE = "#9dbeb9"
-morbidite_degeri = 0
+morbidite_degeri = pred.astype(int)[0]
 
 
 # ----------- FUNCTIONALITY SETUP -------------- #
