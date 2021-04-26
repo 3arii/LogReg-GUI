@@ -31,8 +31,8 @@ def modeller(X_egitim, Y_egitim):
     log = LogisticRegression(random_state=0)
     log.fit(X_egitim, Y_egitim)
 
-    print("[0]Logistic Regression Training Accuracy:",
-          log.score(X_egitim, Y_egitim))
+    #print("[0]Logistic Regression Training Accuracy:",
+    #     log.score(X_egitim, Y_egitim))
     
     return log
 
@@ -47,4 +47,3 @@ FN = cm[1][0]
 FP = cm[0][1]
 
 pred = model.predict(testElem)
-print(pred)
