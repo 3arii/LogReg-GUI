@@ -4,7 +4,7 @@ from tkinter import messagebox
 # constants
 GREY = "#d8e3e7"
 BLUE = "#9dbeb9"
-morbidite_label = "1/0"
+morbidite_degeri = "1/0"
 
 
 # ----------- FUNCTIONALITY SETUP -------------- #
@@ -89,7 +89,7 @@ bmi_entry = Entry(font=("Arial", 10))
 bmi_entry.grid(column=4, row=1, pady=(0, 40), sticky="nw")
 
 # morbidite
-morbidite_label = Label(text=f"Morbidite: {morbidite_label}", bg=GREY, font=("Arial", 12))
+morbidite_label = Label(text=f"Morbidite: {morbidite_degeri}", bg=GREY, font=("Arial", 12))
 morbidite_label.grid(row=3, column=1, sticky="w")
 
 # diğer
