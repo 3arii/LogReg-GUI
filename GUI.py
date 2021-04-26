@@ -3,18 +3,18 @@ from tkinter import messagebox
 import csv
 from Logistic_Regression import *
 
-
 # constants
 GREY = "#d8e3e7"
 BLUE = "#9dbeb9"
-morbidite_degeri = pred.astype(int)[0]
+morbidite_degeri = 0
 
 
 # ----------- FUNCTIONALITY SETUP -------------- #
 def add_to_csv(csv_dict):
     fields = ["Morbidite", "Ameliyat", "Asa Skoru", "Age", "gender", "BMI"]
-    with open('data.csv', mode='a', newline="") as data_file:
-        csv_writer = csv.DictWriter(data_file, fieldnames=fields, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    with open('finalPrimeData.csv', mode='a', newline="") as data_file:
+        csv_writer = csv.DictWriter(
+            data_file, fieldnames=fields, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(csv_dict)
     return
 
@@ -62,6 +62,9 @@ def check_input():
                 "BMI": bmi
             }
             add_to_csv(toCsv)
+
+
+morbidite_degeri = pred.astype(int)[0]
 
 
 # ------------ UI SETUP ----------------- #
